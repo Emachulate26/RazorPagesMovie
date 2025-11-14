@@ -1,0 +1,26 @@
+﻿@page
+@model DashboardModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="card shadow p-4 mt-4">
+    <h2 class="mb-3">Movie Statistics</h2>
+
+    <canvas id="genreChart" style="max-height: 400px;"></canvas>
+</div>
+
+<script>
+    var labels = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.Genres));
+    var data = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.GenreCounts));
+
+    new Chart(document.getElementById("genreChart"), {
+        type: 'pie',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: data
+            }]
+        }
+    });
+</script>

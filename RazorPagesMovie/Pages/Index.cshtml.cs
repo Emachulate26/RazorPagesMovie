@@ -12,9 +12,9 @@ namespace RazorPagesMovie.Pages
             _logger = logger;
         }
 
-        public void OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
-
+           return RedirectToPage("/Movies/Index");
         }
     }
 }
