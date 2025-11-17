@@ -33,46 +33,51 @@
 
     </form>
 
-    <!-- TABLE -->
-    <table class="table table-striped table-hover table-bordered shadow-sm">
-        <thead class="table-dark">
-            <tr>
-                <th>Title</th>
-                <th>Release Date</th>
-                <th>Genre</th>
-                <th>Price</th>
-                <th>Rating</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Movie)
-            {
+    <!-- MOVIE TABLE -->
+    <div class="table-responsive mt-4">
+        <table class="table table-bordered table-striped table-hover shadow-sm align-middle">
+
+            <thead style="background: linear-gradient(90deg, #1e3c72, #2a5298); color: white;">
                 <tr>
-                    <td>@item.Title</td>
-                    <td>@item.ReleaseDate.ToShortDateString()</td>
-                    <td>@item.Genre</td>
-                    <td>@item.Price</td>
-                    <td>@item.Rating</td>
-                    <td>
-                        @for (int i = 0; i < item.Rating; i++)
-                        {
-                            <span style="color: gold; font-size: 1.3em;">★</span>
-                        }
-                        @for (int i = 0; i < 5 - item.Rating; i++)
-                        {
-                            <span style="color: lightgray; font-size: 1.3em;">★</span>
-                        }
-                    </td>
-
-
-                    <td>
-                        <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Edit</a>
-                        <a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">Details</a>
-                        <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
-                    </td>
+                    <th class="py-3">Title</th>
+                    <th class="py-3">Release Date</th>
+                    <th class="py-3">Genre</th>
+                    <th class="py-3">Price</th>
+                    <th class="py-3">Rating</th>
+                    <th class="py-3 text-center" style="width:150px;">Actions</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
 
+            <tbody>
+                @foreach (var item in Model.Movie)
+                {
+                    <tr style="background-color: #f9fbff;">
+                        <td class="fw-bold">@item.Title</td>
+                        <td>@item.ReleaseDate.ToString("yyyy/MM/dd")</td>
+                        <td><span class="badge bg-primary">@item.Genre</span></td>
+                        <td><span class="text-success fw-bold">R @item.Price</span></td>
+
+                        <!-- STAR RATING -->
+                        <td>
+                            @for (int i = 0; i < item.Rating; i++)
+                            {
+                                <span style="color:gold; font-size:1.3em;">★</span>
+                            }
+                            @for (int i = 0; i < 5 - item.Rating; i++)
+                            {
+                                <span style="color:#d4d4d4; font-size:1.3em;">★</span>
+                            }
+                        </td>
+
+                        <td class="text-center">
+                            <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm me-1">Edit</a>
+                            <a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-info btn-sm me-1 text-white">Details</a>
+                            <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
 </div>
