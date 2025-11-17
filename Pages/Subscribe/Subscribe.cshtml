@@ -1,0 +1,24 @@
+﻿@page
+@model SubscribeModel
+@{
+    ViewData["Title"] = "Subscribe";
+}
+
+<h1>Subscribe for Movie Updates</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Subscriber.Email"></label>
+        <input asp-for="Subscriber.Email" class="form-control" />
+        <span asp-validation-for="Subscriber.Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Subscriber.FavoriteGenre">Favorite Genre (optional)</label>
+        <input asp-for="Subscriber.FavoriteGenre" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Subscribe</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
