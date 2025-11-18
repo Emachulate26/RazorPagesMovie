@@ -17,3 +17,4 @@ namespace RazorPagesMovie.Data
         public DbSet<RazorPagesMovie.Models.Movie> Movie { get; set; } = default!;
     }
 }
+        

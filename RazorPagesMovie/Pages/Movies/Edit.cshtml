@@ -1,66 +1,63 @@
 ﻿@page
 @model RazorPagesMovie.Pages.Movies.EditModel
-
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Movie";
 }
 
-<h1>Edit</h1>
+<div class="d-flex justify-content-center">
+    <div class="card shadow-lg p-4 mt-4" style="width: 95%; max-width: 800px;">
+        <h2 class="text-center mb-4 fw-bold text-warning">✏️ Edit Movie</h2>
 
-<h4>Movie</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form method="post" class="needs-validation" novalidate>
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
             <input type="hidden" asp-for="Movie.Id" />
-            <div class="form-group">
-                
-                <label asp-for="Movie.Title" class="control-label"></label>
-                <input asp-for="Movie.Title" class="form-control" />
+
+            <div class="mb-3">
+                <label asp-for="Movie.Title" class="form-label fw-semibold"></label>
+                <input asp-for="Movie.Title" class="form-control shadow-sm" />
                 <span asp-validation-for="Movie.Title" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                
-                <label asp-for="Movie.ReleaseDate" class="control-label"></label>
-                <input asp-for="Movie.ReleaseDate" class="form-control" />
+
+            <div class="mb-3">
+                <label asp-for="Movie.ReleaseDate" class="form-label fw-semibold"></label>
+                <input asp-for="Movie.ReleaseDate" class="form-control shadow-sm" />
                 <span asp-validation-for="Movie.ReleaseDate" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                
-                <label asp-for="Movie.Genre" class="control-label"></label>
-                <input asp-for="Movie.Genre" class="form-control" />
+
+            <div class="mb-3">
+                <label asp-for="Movie.Genre" class="form-label fw-semibold"></label>
+                <input asp-for="Movie.Genre" class="form-control shadow-sm" />
                 <span asp-validation-for="Movie.Genre" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                
-                <label asp-for="Movie.Price" class="control-label"></label>
-                <input asp-for="Movie.Price" class="form-control" />
+
+            <div class="mb-3">
+                <label asp-for="Movie.Price" class="form-label fw-semibold"></label>
+                <input asp-for="Movie.Price" class="form-control shadow-sm" />
                 <span asp-validation-for="Movie.Price" class="text-danger"></span>
             </div>
-            
-            <div class="form-group mb-3">
-                <label asp-for="Movie.Rating" class="form-label"></label>
-                <select asp-for="Movie.Rating" class="form-select">
+
+            <div class="mb-3">
+                <label asp-for="Movie.Rating" class="form-label fw-semibold"></label>
+                <select asp-for="Movie.Rating" class="form-select shadow-sm">
                     <option value="1">★☆☆☆☆</option>
                     <option value="2">★★☆☆☆</option>
                     <option value="3">★★★☆☆</option>
                     <option value="4">★★★★☆</option>
                     <option value="5">★★★★★</option>
                 </select>
+                <span asp-validation-for="Movie.Rating" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+            <div class="d-flex justify-content-between mt-4">
+                <a asp-page="./Index" class="btn btn-outline-secondary">Back to List</a>
+                <button type="submit" class="btn btn-warning text-white shadow-sm">Save Changes</button>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-page="./Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
