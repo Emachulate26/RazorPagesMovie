@@ -5,7 +5,7 @@
 }
 
 <div class="d-flex justify-content-center">
-    <div class="card shadow-lg p-4 mt-4" style="width: 95%; max-width: 800px;">
+    <div class="card shadow-lg p-4 mt-4 movie-form-card">
         <h2 class="text-center mb-4 fw-bold text-success">🎥 Add a New Movie</h2>
 
         <form method="post" class="needs-validation" novalidate>
@@ -55,6 +55,70 @@
     </div>
 </div>
 
+@section Styles {
+    <style>
+        body {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+        }
+
+        .movie-form-card {
+            width: 95%;
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            color: black;
+        }
+
+        .form-label {
+            color: #143f6b;
+        }
+
+        .form-control,
+        .form-select {
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+            .form-control:focus,
+            .form-select:focus {
+                border-color: #2a5298;
+                box-shadow: 0 0 5px rgba(42, 82, 152, 0.5);
+            }
+
+        .btn-success {
+            background: linear-gradient(90deg, #00c853, #64dd17);
+            border: none;
+            border-radius: 50px;
+            padding: 8px 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+            .btn-success:hover {
+                transform: scale(1.05);
+                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            }
+
+        .btn-outline-secondary {
+            border-radius: 50px;
+            padding: 8px 20px;
+        }
+
+        @@media (max-width: 768px) {
+            .movie-form-card {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+}
+
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

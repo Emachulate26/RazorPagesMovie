@@ -1,97 +1,132 @@
 ﻿@page
-@model RazorPagesMovie.Pages.Movies.IndexModel
+@model IndexModel
 @{
-    ViewData["Title"] = "Movies";
+    ViewData["Title"] = "NUMETRO MOVIES";
 }
 
-<div class="d-flex justify-content-center">
-    <div class="card shadow-lg p-4 mt-4" style="width: 95%; max-width: 1300px;">
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #0f0f0f 0%, #1b1d2d 40%, #2e3258 100%);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: white;
+    }
 
-        <!-- PAGE TITLE CENTERED -->
-        <h1 class="text-center mb-4 fw-bold text-primary">🎬 Movie List</h1>
+    .hero-wrapper {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
 
-        <div class="d-flex gap-4">
+    /* 🎟 Movie Ticket Card */
+    .ticket {
+        width: 85%;
+        max-width: 850px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 16px;
+        padding: 40px;
+        text-align: center;
+        position: relative;
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(8px);
+        animation: fadeIn 1.2s ease-out forwards;
+        opacity: 0;
+    }
 
-            <!-- LEFT-SIDE FILTER PANEL -->
-            <div style="width: 260px;">
+        /* Ticket perforated edges */
+        .ticket:before, .ticket:after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #0f0f0f;
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
 
-                <a class="btn btn-primary mb-3 shadow-sm w-100" asp-page="Create">
-                    + Create New
-                </a>
+        .ticket:before {
+            left: -10px;
+        }
 
-                <form method="get" class="bg-light p-3 shadow-sm rounded">
-                    <div class="mb-3">
-                        <label class="form-label fw-semibold">Genre</label>
-                        <select asp-for="MovieGenre" asp-items="Model.Genres" class="form-select shadow-sm">
-                            <option value="">All</option>
-                        </select>
-                    </div>
+        .ticket:after {
+            right: -10px;
+        }
 
-                    <div class="mb-3">
-                        <label class="form-label fw-semibold">Title</label>
-                        <input type="text" asp-for="SearchString" placeholder="Search title..." class="form-control shadow-sm" />
-                    </div>
+    h1.title {
+        font-size: 3.5rem;
+        font-weight: 800;
+        letter-spacing: 3px;
+        margin-bottom: 15px;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.45);
+    }
 
-                    <input type="submit" value="Filter" class="btn btn-secondary shadow-sm w-100" />
-                </form>
-            </div>
+    p.tagline {
+        font-size: 1.2rem;
+        opacity: 0.85;
+        margin-bottom: 35px;
+        max-width: 650px;
+        margin-left: auto;
+        margin-right: auto;
+    }
 
-            <!-- MOVIE TABLE CENTERED WITH BACKGROUND -->
-            <div class="flex-grow-1 d-flex justify-content-center">
-                <div class="p-4 rounded shadow-sm" style="width: 90%; background: linear-gradient(to right, #f0f4ff, #e6f0ff);">
+    /* 🎬 Buttons */
+    .btn-custom {
+        font-size: 1.1rem;
+        padding: 12px 26px;
+        border-radius: 8px;
+        text-decoration: none;
+        margin: 10px;
+        display: inline-block;
+        transition: 0.25s ease;
+    }
 
-                    <!-- MOVIE TITLE CENTERED ON TOP -->
-                    <h2 class="text-center fw-bold text-primary mb-4">🎞️ Available Movies</h2>
+    .btn-movies {
+        background: #ff4747;
+        color: white;
+    }
 
-                    <div class="table-responsive">
-                        <table class="table table-hover table-bordered shadow-sm text-center"
-                               style="background-color: white; border-radius: 12px; overflow: hidden;">
+        .btn-movies:hover {
+            background: #ff2b2b;
+            transform: scale(1.06);
+        }
 
-                            <thead style="background: #143f6b; color:white;">
-                                <tr>
-                                    <th class="py-3">Title</th>
-                                    <th class="py-3">Release Date</th>
-                                    <th class="py-3">Genre</th>
-                                    <th class="py-3">Price</th>
-                                    <th class="py-3">Rating</th>
-                                    <th class="py-3">Actions</th>
-                                </tr>
-                            </thead>
+    .btn-subscribe {
+        background: #0099ff;
+        color: white;
+    }
 
-                            <tbody>
-                                @foreach (var item in Model.Movie)
-                                {
-                                    <tr>
-                                        <td class="fw-bold">@item.Title</td>
-                                        <td>@item.ReleaseDate.ToString("yyyy/MM/dd")</td>
-                                        <td><span class="badge bg-primary">@item.Genre</span></td>
-                                        <td class="text-success fw-bold">R @item.Price</td>
+        .btn-subscribe:hover {
+            background: #007bce;
+            transform: scale(1.06);
+        }
 
-                                        <!-- STAR RATING -->
-                                        <td>
-                                            @for (int i = 0; i < item.Rating; i++)
-                                            {
-                                                <span style="color:gold; font-size:1.3em;">★</span>
-                                            }
-                                            @for (int i = 0; i < 5 - item.Rating; i++)
-                                            {
-                                                <span style="color:#d4d4d4; font-size:1.3em;">★</span>
-                                            }
-                                        </td>
+    @@keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(25px);
+        }
 
-                                        <td>
-                                            <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Edit</a>
-                                            <a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-info btn-sm text-white">Details</a>
-                                            <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Delete</a>
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
 
-                        </table>
-                    </div>
-                </div>
-            </div> <!-- <-- Added missing closing tag for the .d-flex.gap-4 div -->
-        </div>
+<div class="hero-wrapper">
+    <div class="ticket">
+        <h1 class="title">NUMETRO MOVIES</h1>
+        <p class="tagline">
+            Experience movies like never before. Explore the latest releases, find showtimes,
+            and subscribe for instant updates — all in one cinematic experience.
+        </p>
+
+        <a asp-page="/Movies/view" class="btn-custom btn-movies">🎬 Browse Movies</a>
+        <a asp-page="/Movies/Subscribe" class="btn-custom btn-subscribe">🎟 Subscribe</a>
     </div>
 </div>
