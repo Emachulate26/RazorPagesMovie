@@ -9,7 +9,7 @@ namespace YourAppNamespace.Data
     {
         // Replace strings with values from config if preferred
         private const string AdminEmail = "admin@example.com";
-        private const string AdminPassword = "Admin@123"; // use strong password or read from config
+        private const string AdminPassword = "Sebotse@97"; // use strong password or read from config
 
         public static async Task EnsureAdminCreatedAsync(IServiceProvider serviceProvider)
         {
