@@ -1,0 +1,55 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Threading.Tasks;
+
+namespace YourAppNamespace.Data
+{
+    public static class SeedData
+    {
+        // Replace strings with values from config if preferred
+        private const string AdminEmail = "admin@example.com";
+        private const string AdminPassword = "Admin@123"; // use strong password or read from config
+
+        public static async Task EnsureAdminCreatedAsync(IServiceProvider serviceProvider)
+        {
+            using var scope = serviceProvider.CreateScope();
+            var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+
+            // 1. Ensure Admin role exists
+            var adminRoleExists = await roleManager.RoleExistsAsync("Admin");
+            if (!adminRoleExists)
+            {
+                var roleResult = await roleManager.CreateAsync(new IdentityRole("Admin"));
+                if (!roleResult.Succeeded)
+                {
+                    throw new Exception("Failed to create Admin role: " + string.Join(", ", roleResult.Errors));
+                }
+            }
+
+            // 2. Ensure Admin user exists
+            var adminUser = await userManager.FindByEmailAsync(AdminEmail);
+            if (adminUser == null)
+            {
+                adminUser = new IdentityUser { UserName = AdminEmail, Email = AdminEmail, EmailConfirmed = true };
+                var createUserResult = await userManager.CreateAsync(adminUser, AdminPassword);
+                if (!createUserResult.Succeeded)
+                {
+                    throw new Exception("Failed to create Admin user: " + string.Join(", ", createUserResult.Errors));
+                }
+            }
+
+            // 3. Ensure user is in Admin role
+            var inRole = await userManager.IsInRoleAsync(adminUser, "Admin");
+            if (!inRole)
+            {
+                var addToRoleResult = await userManager.AddToRoleAsync(adminUser, "Admin");
+                if (!addToRoleResult.Succeeded)
+                {
+                    throw new Exception("Failed to add Admin user to Admin role: " + string.Join(", ", addToRoleResult.Errors));
+                }
+            }
+        }
+    }
+}
