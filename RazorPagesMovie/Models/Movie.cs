@@ -27,6 +27,8 @@ public class Movie
     [Range(1, 5)]
     public int Rating { get; set; }
 
+    public string? ImageUrl { get; set; }
+
 
 
 }
