@@ -37,25 +37,26 @@
         opacity: 0;
     }
 
-        /* Ticket perforated edges */
-        .ticket:before, .ticket:after {
-            content: "";
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: #0f0f0f;
-            border-radius: 50%;
-            top: 50%;
-            transform: translateY(-50%);
-        }
+    /* Ticket perforated edges */
+    .ticket:before,
+    .ticket:after {
+        content: "";
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: #0f0f0f;
+        border-radius: 50%;
+        top: 50%;
+        transform: translateY(-50%);
+    }
 
-        .ticket:before {
-            left: -10px;
-        }
+    .ticket:before {
+        left: -10px;
+    }
 
-        .ticket:after {
-            right: -10px;
-        }
+    .ticket:after {
+        right: -10px;
+    }
 
     h1.title {
         font-size: 3.5rem;
@@ -90,20 +91,20 @@
         color: white;
     }
 
-        .btn-movies:hover {
-            background: #ff2b2b;
-            transform: scale(1.06);
-        }
+    .btn-movies:hover {
+        background: #ff2b2b;
+        transform: scale(1.06);
+    }
 
     .btn-subscribe {
         background: #0099ff;
         color: white;
     }
 
-        .btn-subscribe:hover {
-            background: #007bce;
-            transform: scale(1.06);
-        }
+    .btn-subscribe:hover {
+        background: #007bce;
+        transform: scale(1.06);
+    }
 
     @@keyframes fadeIn {
         from {
@@ -126,7 +127,7 @@
             and subscribe for instant updates — all in one cinematic experience.
         </p>
 
-        <a asp-page="/Movies/view" class="btn-custom btn-movies">🎬 Browse Movies</a>
+        <a asp-page="/Movies/View" class="btn-custom btn-movies">🎬 Browse Movies</a>
         <a asp-page="/Movies/Subscribe" class="btn-custom btn-subscribe">🎟 Subscribe</a>
     </div>
 </div>

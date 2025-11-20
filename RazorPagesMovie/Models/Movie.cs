@@ -26,6 +26,9 @@ public class Movie
    
     [Range(1, 5)]
     public int Rating { get; set; }
+    [Required]
+    [EmailAddress(ErrorMessage = "Invalid email.")]
+    public string Email { get; set; }
 
 
 

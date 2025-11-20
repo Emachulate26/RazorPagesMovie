@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using RazorPagesMovie.Models;
+using RazorPagesMovie.Pages;
 
 namespace RazorPagesMovie.Data
 {
@@ -15,6 +16,7 @@ namespace RazorPagesMovie.Data
         }
 
         public DbSet<RazorPagesMovie.Models.Movie> Movie { get; set; } = default!;
+        public DbSet<RazorPagesMovie.Pages.Identity> Identity { get; set; } = default!;
     }
 }
         
