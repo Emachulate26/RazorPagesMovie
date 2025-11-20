@@ -1,0 +1,13 @@
+@page
+@model BookModel
+
+<link rel="stylesheet" href="/css/site.css" />
+
+<div class="hero-wrapper">
+    <div class="ticket">
+        <h1 class="title">Booking Confirmed</h1>
+        <p class="tagline">You have successfully booked <b>@Model.Movie?.Title</b> at <b>@Model.TimeSlot</b>.</p>
+
+        <a asp-page="Index" class="btn-custom btn-movies">Back to Movies</a>
+    </div>
+</div>
