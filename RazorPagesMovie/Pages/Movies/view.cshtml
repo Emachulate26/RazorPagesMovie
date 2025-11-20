@@ -1,0 +1,171 @@
+﻿@page
+@model RazorPagesMovie.Pages.Movies.IndexModel
+@{
+    ViewData["Title"] = "NUMETRO MOVIES";
+}
+
+
+
+<div class="movies-page">
+    <!-- Page Header -->
+    <div class="text-center mb-4">
+        <h1 class="gradient-title">NUMETRO MOVIES</h1>
+        <p class="tagline">Your Gateway to Unlimited Entertainment 🎬</p>
+    </div>
+
+    <!-- Movie Table -->
+    <div class="table-container p-4 rounded shadow-lg">
+        <table class="table table-hover text-center">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Genre</th>
+                    <th>Release Date</th>
+                    <th>Price</th>
+                    <th>Rating</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var movie in Model.Movie)
+                {
+                    <tr>
+                        <td>@movie.Title</td>
+                        <td>
+                            <span class="badge genre-badge genre-@movie.Genre.ToLower()">@movie.Genre</span>
+                        </td>
+                        <td>@movie.ReleaseDate.ToString("yyyy/MM/dd")</td>
+                        <td class="text-success fw-bold">R @movie.Price</td>
+                        <td>
+                            @for (int i = 0; i < movie.Rating; i++)
+                            {
+                                <span style="color:gold;">★</span>
+                            }
+                            @for (int i = 0; i < 5 - movie.Rating; i++)
+                            {
+                                <span style="color:#d4d4d4;">★</span>
+                            }
+                        </td>
+                        <td>
+                            <a asp-page="./Details" asp-route-id="@movie.Id" class="btn btn-primary btn-sm">Details</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            height: 100%;
+        }
+
+        .movies-page {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 50px 20px;
+        }
+
+        .gradient-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: #ffd700;
+            font-style: italic;
+        }
+
+        .table-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            padding: 20px;
+            color: black;
+            overflow-x: auto;
+        }
+
+        table.table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+            table.table th, table.table td {
+                padding: 12px;
+                border-bottom: 1px solid #ddd;
+            }
+
+            table.table th {
+                background: #143f6b;
+                color: white;
+            }
+
+            table.table tr:hover {
+                background: #e6f0ff;
+                transform: scale(1.01);
+            }
+
+        .btn-primary {
+            background: linear-gradient(90deg, #ff416c, #ff4b2b);
+            border: none;
+            border-radius: 50px;
+            padding: 5px 15px;
+            color: white;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+            .btn-primary:hover {
+                transform: scale(1.05);
+                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            }
+
+        .genre-badge {
+            padding: 5px 10px;
+            border-radius: 12px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .genre-romance {
+            background-color: #ff69b4;
+        }
+
+        .genre-comedy {
+            background-color: #00c853;
+        }
+
+        .genre-action {
+            background-color: #2196f3;
+        }
+
+        .genre-drama {
+            background-color: #ff9800;
+        }
+
+        .genre-horror {
+            background-color: #9c27b0;
+        }
+
+        @@media (max-width: 768px) {
+            .gradient-title {
+                font-size: 2.2rem;
+            }
+
+            .tagline {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+}

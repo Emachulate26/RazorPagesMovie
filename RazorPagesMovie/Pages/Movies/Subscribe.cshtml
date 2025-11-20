@@ -1,0 +1,97 @@
+﻿@page
+@model RazorPagesMovie.Pages.Movies.SubscribeModel
+@{
+    ViewData["Title"] = "Subscribe for Showtimes";
+}
+
+<div class="subscribe-page">
+    <div class="text-center mb-4">
+        <h1 class="gradient-title">📩 Subscribe for Movie Alerts</h1>
+        <p class="tagline">Get notified when new movies hit Polokwane cinemas!</p>
+    </div>
+
+    <!-- Subscription Form -->
+    <div class="form-container card p-4 shadow-lg mb-5 mx-auto" style="max-width: 600px;">
+        <form method="post" class="needs-validation" novalidate>
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="mb-3">
+                <label for="Email" class="form-label fw-semibold">Email Address</label>
+                <input type="email" name="Email" class="form-control shadow-sm" required />
+            </div>
+
+            <div class="mb-3">
+                <label for="Preferences" class="form-label fw-semibold">Favorite Genre</label>
+                <select name="Preferences" class="form-select shadow-sm">
+                    <option>Action</option>
+                    <option>Comedy</option>
+                    <option>Drama</option>
+                    <option>Romance</option>
+                    <option>Horror</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Subscribe</button>
+        </form>
+    </div>
+
+    <!-- Showtimes Table -->
+    <div class="table-container p-4 rounded shadow-lg">
+        <h2 class="text-center text-light mb-4">🎬 Now Showing in Polokwane</h2>
+        <table class="table table-hover text-center">
+            <thead>
+                <tr>
+                    <th>Movie</th>
+                    <th>Age Restriction</th>
+                    <th>Days</th>
+                    <th>Showtimes</th>
+                    <th>Cinema</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Overcomer</td>
+                    <td>PG (7–9)</td>
+                    <td>Mon–Thu</td>
+                    <td>11:45, 14:30, 17:15, 20:15</td>
+                    <td>Mall of the North</td>
+                </tr>
+                <tr>
+                    <td>Uncovered</td>
+                    <td>16</td>
+                    <td>Fri–Sun</td>
+                    <td>09:15, 11:30, 14:00, 16:45, 19:45</td>
+                    <td>Mall of the North</td>
+                </tr>
+                <tr>
+                    <td>Fast & Furious: Hobbs & Shaw</td>
+                    <td>13</td>
+                    <td>Sat–Sun</td>
+                    <td>11:30, 14:15, 17:15, 20:15</td>
+                    <td>Mall of the North</td>
+                </tr>
+                <tr>
+                    <td>Angel Has Fallen</td>
+                    <td>16</td>
+                    <td>Fri–Sun</td>
+                    <td>09:00, 11:45, 14:30, 17:15, 20:00</td>
+                    <td>Mall of the North</td>
+                </tr>
+                <tr>
+                    <td>The Lion King</td>
+                    <td>All Ages</td>
+                    <td>Daily</td>
+                    <td>Various Times</td>
+                    <td>Mall of the North</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/movies.css" asp-append-version="true" />
+
+
+
+}
